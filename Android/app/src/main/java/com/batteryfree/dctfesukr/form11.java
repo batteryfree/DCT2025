@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -53,6 +53,7 @@ public class form11 extends AppCompatActivity {
         } catch (Exception e){}
 
         f11_editText1 = findViewById(R.id.f11_editText1);
+        f11_editText1.requestFocus();
 //        f11_editText1.setInputType(InputType.TYPE_NULL);
 
         f11_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -68,6 +69,27 @@ public class form11 extends AppCompatActivity {
                     isRequestCancelled = false; // Сбрасываем флаг отмены
                     showProgressDialogWithCancelOption(); // Показываем прогресс-диалог
                     sendPostRequest(() -> isRequestInProgress = false); // Сбрасываем флаг после выполнения
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f11_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f11_editText1.selectAll();
+                }
+            }
+        });
+
+        f11_editText1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f11_editText1.requestFocus();
+                    f11_editText1.selectAll();
                     return true;
                 }
                 return false;

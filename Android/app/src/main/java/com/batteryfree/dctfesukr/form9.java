@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,6 +59,7 @@ public class form9 extends AppCompatActivity {
         } catch (Exception e){}
 
         f9_editText1 = findViewById(R.id.f9_editText1);
+        f9_editText1.requestFocus();
         f9_l2_1 = findViewById(R.id.f9_l2_1);
         f9_l3_1 = findViewById(R.id.f9_l3_1);
         f9_l4_1 = findViewById(R.id.f9_l4_1);
@@ -90,6 +91,27 @@ public class form9 extends AppCompatActivity {
                 return false;
             }
         });
+
+        f9_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f9_editText1.selectAll();
+                }
+            }
+        });
+
+        f9_editText1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f9_editText1.requestFocus();
+                    f9_editText1.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     private void showProgressDialogWithCancelOption() {
@@ -97,7 +119,7 @@ public class form9 extends AppCompatActivity {
             progressDialog = new ProgressDialog(form9.this);
             progressDialog.setMessage("Відправка данних...");
             progressDialog.setCancelable(false);
-            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Отменить", (dialog, which) -> cancelRequest());
+            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Відміна", (dialog, which) -> cancelRequest());
             progressDialog.show();
 
             // Активируем кнопку "Отменить" через 5 секунд
@@ -112,7 +134,7 @@ public class form9 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("Запрос был отменен пользователем.");
+        showInfo("Запрос біл відмінен користувачем.");
     }
 
     public void startSubmit(View v) {
@@ -218,7 +240,7 @@ public class form9 extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         dismissLoader();
-                        showInfo("Ошибка: код ответа " + code);
+                        showInfo("Помилка: код відповіді " + code);
                         onComplete.run();
                     });
                 }
@@ -226,7 +248,7 @@ public class form9 extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     dismissLoader();
-                    showInfo("Ошибка: " + e.getMessage());
+                    showInfo("Помилка: " + e.getMessage());
                     onComplete.run();
                 });
             }

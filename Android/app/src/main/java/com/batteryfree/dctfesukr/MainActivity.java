@@ -1,8 +1,8 @@
 package com.batteryfree.dctfesukr;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -14,7 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    public String URL_1C = "http://192.168.23.206:8080/TSD/hs/terminal/api"; //http://192.168.23.3:8080/1C_Develop/hs/terminal/api";//"http://192.168.23.206:8080/TSD/hs/terminal/api"; //
+    public String URL_1C = "http://192.168.23.206:8080/TSD/hs/terminal/api";
     public String serialNumberDevice;
     public JSONObject jsonOutput = new JSONObject();
 
@@ -30,12 +30,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                serialNumberDevice = Build.getSerial();
-            } else {
-                serialNumberDevice = Build.SERIAL;
-            }
-
+        serialNumberDevice = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
         creteJSONData();
     }
 
@@ -78,7 +73,14 @@ public class MainActivity extends AppCompatActivity {
             jsonOutput.put("b", "");
             jsonOutput.put("d1", "");
             jsonOutput.put("nextForm", 0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-        }  catch (Exception e) {}
+    @Override
+    public void onBackPressed() {
+        // Блокируем кнопку "Назад"
+        super.onBackPressed();
     }
 }

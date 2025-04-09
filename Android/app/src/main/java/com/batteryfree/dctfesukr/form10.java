@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -57,6 +57,7 @@ public class form10 extends AppCompatActivity {
         f10_editText1 = findViewById(R.id.f10_editText1);
         f10_editText2 = findViewById(R.id.f10_editText2);
         f10_editText3 = findViewById(R.id.f10_editText3);
+        f10_editText1.requestFocus();
 
 //        f10_editText1.setInputType(InputType.TYPE_NULL);
 //        f10_editText2.setInputType(InputType.TYPE_NULL);
@@ -75,6 +76,69 @@ public class form10 extends AppCompatActivity {
                     isRequestCancelled = false; // Сбрасываем флаг отмены
                     showProgressDialogWithCancelOption(); // Показываем прогресс-диалог
                     sendPostRequest(() -> isRequestInProgress = false); // Сбрасываем флаг после выполнения
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f10_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f10_editText1.selectAll();
+                }
+            }
+        });
+
+        f10_editText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f10_editText2.selectAll();
+                }
+            }
+        });
+
+        f10_editText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f10_editText3.selectAll();
+                }
+            }
+        });
+
+        f10_editText1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f10_editText1.requestFocus();
+                    f10_editText1.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f10_editText2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f10_editText2.requestFocus();
+                    f10_editText2.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f10_editText3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f10_editText3.requestFocus();
+                    f10_editText3.selectAll();
                     return true;
                 }
                 return false;
@@ -186,5 +250,4 @@ public class form10 extends AppCompatActivity {
             }
         }).start();
     }
-
 }

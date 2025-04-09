@@ -4,8 +4,8 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -68,9 +68,92 @@ public class form4 extends AppCompatActivity {
 //        f4_editText3.setInputType(InputType.TYPE_NULL);
 //        f4_editText1.setInputType(InputType.TYPE_NULL);
 
-
+        f4_editText1.requestFocus();
         f4_l2_1 = findViewById(R.id.f4_l2_1);
         f4_l3_1 = findViewById(R.id.f4_l3_1);
+
+        f4_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f4_editText1.selectAll();
+                }
+            }
+        });
+
+        f4_editText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f4_editText2.selectAll();
+                }
+            }
+        });
+
+        f4_editText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f4_editText3.selectAll();
+                }
+            }
+        });
+
+        f4_editText4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f4_editText4.selectAll();
+                }
+            }
+        });
+
+        f4_editText1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f4_editText1.requestFocus();
+                    f4_editText1.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f4_editText2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f4_editText2.requestFocus();
+                    f4_editText2.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+        f4_editText3.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f4_editText3.requestFocus();
+                    f4_editText3.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f4_editText4.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f4_editText4.requestFocus();
+                    f4_editText4.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         f4_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
@@ -121,7 +204,6 @@ public class form4 extends AppCompatActivity {
                 return false;
             }
         });
-
     }
 
     private void showProgressDialogWithCancelOption() {
@@ -129,7 +211,7 @@ public class form4 extends AppCompatActivity {
             progressDialog = new ProgressDialog(form4.this);
             progressDialog.setMessage("Відправка данних...");
             progressDialog.setCancelable(false);
-            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Отменить", (dialog, which) -> cancelRequest());
+            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Відміна", (dialog, which) -> cancelRequest());
             progressDialog.show();
 
             // Активируем кнопку "Отменить" через 5 секунд
@@ -144,7 +226,7 @@ public class form4 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("Запрос был отменен пользователем.");
+        showInfo("Запрос був відмінен користувачем.");
     }
 
     public void startMenu1(View v) {
@@ -261,7 +343,7 @@ public class form4 extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         dismissLoader();
-                        showInfo("Ошибка: код ответа " + code);
+                        showInfo("Помилка код відповіді " + code);
                         onComplete.run();
                     });
                 }
@@ -269,7 +351,7 @@ public class form4 extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     dismissLoader();
-                    showInfo("Ошибка: " + e.getMessage());
+                    showInfo("Помилка: " + e.getMessage());
                     onComplete.run();
                 });
             }

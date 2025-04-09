@@ -1,14 +1,14 @@
 package com.batteryfree.dctfesukr;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
+import android.os.Handler;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.view.KeyEvent;
-import android.app.ProgressDialog;
-import android.os.Handler;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -55,6 +55,7 @@ public class form12 extends AppCompatActivity {
 
         f12_editText1 = findViewById(R.id.f12_editText1);
         f12_editText2 = findViewById(R.id.f12_editText2);
+        f12_editText1.requestFocus();
 
 //        f12_editText1.setInputType(InputType.TYPE_NULL);
 //        f12_editText2.setInputType(InputType.TYPE_NULL);
@@ -73,13 +74,54 @@ public class form12 extends AppCompatActivity {
                     showProgressDialogWithCancelOption(); // Показываем прогресс-диалог
                     sendPostRequest(() -> isRequestInProgress = false); // Сбрасываем флаг после выполнения
                     return true;
-                                   }
+                }
                 return false;
             }
         });
+
+        f12_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f12_editText1.selectAll();
+                }
+            }
+        });
+
+        f12_editText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f12_editText2.selectAll();
+                }
+            }
+        });
+
+        f12_editText1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f12_editText1.requestFocus();
+                    f12_editText1.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f12_editText2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f12_editText2.requestFocus();
+                    f12_editText2.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
     }
-
-
 
     private void showProgressDialogWithCancelOption() {
         runOnUiThread(() -> {

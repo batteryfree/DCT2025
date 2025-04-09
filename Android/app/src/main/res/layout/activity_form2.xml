@@ -19,7 +19,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_revert"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck"
+        android:focusable="false"
+        android:focusableInTouchMode="false"/>
 
     <TextView
         android:id="@+id/f2_l1"
@@ -124,7 +126,7 @@
         android:layout_marginEnd="10dp"
         android:ems="10"
         android:hint="@string/zero"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

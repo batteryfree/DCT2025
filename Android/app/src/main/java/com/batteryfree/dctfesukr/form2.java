@@ -4,9 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -58,13 +58,15 @@ public class form2 extends AppCompatActivity {
 
         f2_editText1 = findViewById(R.id.f2_editText1);
         f2_editText2 = findViewById(R.id.f2_editText2);
+
+        f2_editText1.requestFocus();
 //        f2_editText1.setInputType(InputType.TYPE_NULL);
 //        f2_editText2.setInputType(InputType.TYPE_NULL);
         f2_l2_1 = findViewById(R.id.f2_l2_1);
         f2_l3_1 = findViewById(R.id.f2_l3_1);
 
 
-            f2_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        f2_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
 
             @Override
@@ -88,6 +90,49 @@ public class form2 extends AppCompatActivity {
                 return false;
             }
         });
+
+        f2_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f2_editText1.selectAll();
+                }
+            }
+        });
+
+        f2_editText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (hasFocus) {
+                    f2_editText2.selectAll();
+                }
+            }
+        });
+
+        f2_editText1.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f2_editText1.requestFocus();
+                    f2_editText1.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        f2_editText2.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
+                    f2_editText2.requestFocus();
+                    f2_editText2.selectAll();
+                    return true;
+                }
+                return false;
+            }
+        });
+
 
         f2_editText2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
@@ -120,7 +165,7 @@ public class form2 extends AppCompatActivity {
             progressDialog = new ProgressDialog(form2.this);
             progressDialog.setMessage("Відправка данних...");
             progressDialog.setCancelable(false);
-            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Отменить", (dialog, which) -> cancelRequest());
+            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Відмінити", (dialog, which) -> cancelRequest());
             progressDialog.show();
 
             // Активируем кнопку "Отменить" через 5 секунд
@@ -135,7 +180,7 @@ public class form2 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("Запрос был отменен пользователем.");
+        showInfo("ЗАпрос був відмінен користувачем.");
     }
 
     public void startMenu1(View v) {
@@ -295,5 +340,4 @@ public class form2 extends AppCompatActivity {
         intent.putExtra("jsonOutput", jsonOutput.toString());
         startActivity(intent);
     }
-
 }
