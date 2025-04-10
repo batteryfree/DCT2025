@@ -57,6 +57,10 @@ public class form10 extends AppCompatActivity {
         f10_editText1 = findViewById(R.id.f10_editText1);
         f10_editText2 = findViewById(R.id.f10_editText2);
         f10_editText3 = findViewById(R.id.f10_editText3);
+        f10_editText1.setShowSoftInputOnFocus(false);
+        f10_editText2.setShowSoftInputOnFocus(false);
+        f10_editText3.setShowSoftInputOnFocus(false);
+
         f10_editText1.requestFocus();
 
 //        f10_editText1.setInputType(InputType.TYPE_NULL);
@@ -236,7 +240,7 @@ public class form10 extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         dismissLoader();
-                        showInfo("Ошибка: код ответа " + code);
+                        showInfo("Помилка: код відповіді " + code);
                         onComplete.run();
                     });
                 }
@@ -244,7 +248,7 @@ public class form10 extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     dismissLoader();
-                    showInfo("Ошибка: " + e.getMessage());
+                    showInfo("Помилка: " + e.getMessage());
                     onComplete.run();
                 });
             }

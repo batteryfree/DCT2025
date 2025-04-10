@@ -54,6 +54,8 @@ public class form6 extends AppCompatActivity {
         } catch (Exception e){}
 
         f6_editText1 = findViewById(R.id.f6_editText1);
+        f6_editText1.setShowSoftInputOnFocus(false);
+
         f6_editText1.requestFocus();
 //        f6_editText1.setInputType(InputType.TYPE_NULL);
 

@@ -55,6 +55,9 @@ public class form12 extends AppCompatActivity {
 
         f12_editText1 = findViewById(R.id.f12_editText1);
         f12_editText2 = findViewById(R.id.f12_editText2);
+        f12_editText1.setShowSoftInputOnFocus(false);
+        f12_editText2.setShowSoftInputOnFocus(false);
+
         f12_editText1.requestFocus();
 
 //        f12_editText1.setInputType(InputType.TYPE_NULL);
@@ -128,7 +131,7 @@ public class form12 extends AppCompatActivity {
             progressDialog = new ProgressDialog(form12.this);
             progressDialog.setMessage("Відправка данних...");
             progressDialog.setCancelable(false);
-            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Отменить", (dialog, which) -> cancelRequest());
+            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Відміна", (dialog, which) -> cancelRequest());
             progressDialog.show();
 
             // Активируем кнопку "Отменить" через 5 секунд
@@ -143,7 +146,7 @@ public class form12 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("Запрос был отменен пользователем.");
+        showInfo("Запрос бул.");
     }
 
     public void startMenu1(View v) {
@@ -209,7 +212,7 @@ public class form12 extends AppCompatActivity {
                                 jsonOutput.put("b", f12_editText2.getText().toString().trim());
 
                             } catch (Exception e) {
-                                runOnUiThread(() -> showInfo("Ошибка при формировании данных: " + e.getMessage()));
+                                runOnUiThread(() -> showInfo("Помилка при формуванні даних: " + e.getMessage()));
                             }
                             Intent intent = new Intent(this, form2.class);
                             intent.putExtra("jsonOutput", jsonOutput.toString());
@@ -228,7 +231,7 @@ public class form12 extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         dismissLoader();
-                        showInfo("Ошибка: код ответа " + code);
+                        showInfo("Помилка: код відповіді " + code);
                         onComplete.run();
                     });
                 }
@@ -236,7 +239,7 @@ public class form12 extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     dismissLoader();
-                    showInfo("Ошибка: " + e.getMessage());
+                    showInfo("Помилка: " + e.getMessage());
                     onComplete.run();
                 });
             }

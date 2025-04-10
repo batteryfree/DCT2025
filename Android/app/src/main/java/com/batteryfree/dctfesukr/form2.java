@@ -1,5 +1,6 @@
 package com.batteryfree.dctfesukr;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -58,6 +59,8 @@ public class form2 extends AppCompatActivity {
 
         f2_editText1 = findViewById(R.id.f2_editText1);
         f2_editText2 = findViewById(R.id.f2_editText2);
+        f2_editText1.setShowSoftInputOnFocus(false);
+        f2_editText2.setShowSoftInputOnFocus(false);
 
         f2_editText1.requestFocus();
 //        f2_editText1.setInputType(InputType.TYPE_NULL);
@@ -68,6 +71,8 @@ public class form2 extends AppCompatActivity {
 
         f2_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
+
+
 
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -180,7 +185,7 @@ public class form2 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("ЗАпрос був відмінен користувачем.");
+        showInfo("Запит був відмінен користувачем.");
     }
 
     public void startMenu1(View v) {
@@ -284,7 +289,7 @@ public class form2 extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         dismissLoader();
-                        showInfo("Ошибка: код ответа " + code);
+                        showInfo("Помилка: код відповіді " + code);
                         onComplete.run();
                     });
                 }
@@ -292,7 +297,7 @@ public class form2 extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     dismissLoader();
-                    showInfo("Ошибка: " + e.getMessage());
+                    showInfo("Помилка: " + e.getMessage());
                     onComplete.run();
                 });
             }
@@ -339,5 +344,15 @@ public class form2 extends AppCompatActivity {
         intent.putExtra("URL", URL_1C);
         intent.putExtra("jsonOutput", jsonOutput.toString());
         startActivity(intent);
+    }
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        f2_editText1.setText("");
+        f2_editText2.setText("");
+        f2_l2_1.setText("");
+        f2_l3_1.setText("");
+        f2_editText1.requestFocus();
+        f2_editText1.selectAll();
     }
 }

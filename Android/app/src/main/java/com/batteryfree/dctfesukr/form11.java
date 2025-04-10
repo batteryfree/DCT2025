@@ -53,6 +53,8 @@ public class form11 extends AppCompatActivity {
         } catch (Exception e){}
 
         f11_editText1 = findViewById(R.id.f11_editText1);
+        f11_editText1.setShowSoftInputOnFocus(false);
+
         f11_editText1.requestFocus();
 //        f11_editText1.setInputType(InputType.TYPE_NULL);
 
@@ -107,7 +109,7 @@ public class form11 extends AppCompatActivity {
             progressDialog = new ProgressDialog(form11.this);
             progressDialog.setMessage("Відправка данних...");
             progressDialog.setCancelable(false);
-            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Отменить", (dialog, which) -> cancelRequest());
+            progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Відміна", (dialog, which) -> cancelRequest());
             progressDialog.show();
 
             // Активируем кнопку "Отменить" через 5 секунд
@@ -122,7 +124,7 @@ public class form11 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("Запрос был отменен пользователем.");
+        showInfo("Запрос був.");
     }
 
     public void showInfo(String text) {
@@ -190,7 +192,7 @@ public class form11 extends AppCompatActivity {
                 } else {
                     runOnUiThread(() -> {
                         dismissLoader();
-                        showInfo("Ошибка: код ответа " + code);
+                        showInfo("Помилка: код відповіді " + code);
                         onComplete.run();
                     });
                 }
@@ -198,7 +200,7 @@ public class form11 extends AppCompatActivity {
             } catch (Exception e) {
                 runOnUiThread(() -> {
                     dismissLoader();
-                    showInfo("Ошибка: " + e.getMessage());
+                    showInfo("Помилка: " + e.getMessage());
                     onComplete.run();
                 });
             }
