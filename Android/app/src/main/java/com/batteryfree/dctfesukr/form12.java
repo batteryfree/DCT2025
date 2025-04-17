@@ -106,6 +106,7 @@ public class form12 extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
                     f12_editText1.requestFocus();
                     f12_editText1.selectAll();
+                    v.performClick();
                     return true;
                 }
                 return false;
@@ -118,6 +119,7 @@ public class form12 extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
                     f12_editText2.requestFocus();
                     f12_editText2.selectAll();
+                    v.performClick();
                     return true;
                 }
                 return false;
@@ -146,7 +148,7 @@ public class form12 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("Запрос бул.");
+        showInfo("Запит було скасовано користувачем.");
     }
 
     public void startMenu1(View v) {

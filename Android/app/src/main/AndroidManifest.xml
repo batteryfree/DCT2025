@@ -19,6 +19,9 @@
         android:theme="@style/Theme.DCTFESUKR"
         tools:targetApi="31">
         <activity
+            android:name=".settings"
+            android:exported="false" />
+        <activity
             android:name=".form11"
             android:exported="false" />
         <activity
@@ -32,6 +35,9 @@
             android:exported="false" />
         <activity
             android:name=".form10"
+            android:exported="false" />
+        <activity
+            android:name=".form5"
             android:exported="false" />
         <activity
             android:name=".menu2"

@@ -4,10 +4,10 @@
     <selectionStates>
       <SelectionState runConfigName="app">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-04-09T06:46:26.064294Z">
+        <DropdownSelection timestamp="2025-04-14T09:59:08.428723700Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="Default" identifier="serial=AXC1516B00061;connection=c25d5453" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\Battery.free\.android\avd\chipherlab_API_23.avd" />
             </handle>
           </Target>
         </DropdownSelection>

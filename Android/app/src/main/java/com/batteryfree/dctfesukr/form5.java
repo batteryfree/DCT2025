@@ -9,8 +9,8 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
@@ -28,16 +28,15 @@ import java.net.URL;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class form4 extends AppCompatActivity {
+public class form5 extends AppCompatActivity {
     public JSONObject jsonOutput;
     public String URL_1C;
 
-    public EditText f4_editText1;
-    public EditText f4_editText2;
-    public EditText f4_editText3;
-    public EditText f4_editText4;
-    public TextView f4_l2_1;
-    public TextView f4_l3_1;
+    public EditText f5_editText1;
+    public EditText f5_editText2;
+    public EditText f5_editText3;
+    public TextView f5_l2_1;
+    public TextView f5_l3_1;
     private ProgressDialog progressDialog;
     private boolean isRequestCancelled = false;
     private ScrollView scrollView;
@@ -46,85 +45,72 @@ public class form4 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_form4);
+        setContentView(R.layout.activity_forma5);
         scrollView = findViewById(R.id.scrollView);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
         Intent intent = getIntent();
         URL_1C =  intent.getStringExtra("URL");
         String _jsonOutput = intent.getStringExtra("jsonOutput");
 
         try {
             jsonOutput = new JSONObject(_jsonOutput);
-            jsonOutput.put("form", 4);
-            jsonOutput.put("nextForm", 4);
+            jsonOutput.put("form", 5);
+            jsonOutput.put("nextForm", 5);
         } catch (Exception e){}
 
-        f4_editText1 = findViewById(R.id.f4_editText1);
-        f4_editText2 = findViewById(R.id.f4_editText2);
-        f4_editText3 = findViewById(R.id.f4_editText3);
-        f4_editText4 = findViewById(R.id.f4_editText4);
+        f5_editText1 = findViewById(R.id.f5_editText1);
+        f5_editText2 = findViewById(R.id.f5_editText2);
+        f5_editText3 = findViewById(R.id.f5_editText3);
 
-        f4_editText1.setShowSoftInputOnFocus(false);
-        f4_editText2.setShowSoftInputOnFocus(false);
-        f4_editText3.setShowSoftInputOnFocus(false);
-        f4_editText4.setShowSoftInputOnFocus(false);
+        f5_editText1.setShowSoftInputOnFocus(false);
+        f5_editText2.setShowSoftInputOnFocus(false);
+        f5_editText3.setShowSoftInputOnFocus(false);
 
-        f4_editText1.requestFocus();
-        f4_l2_1 = findViewById(R.id.f4_l2_1);
-        f4_l3_1 = findViewById(R.id.f4_l3_1);
+        f5_editText1.requestFocus();
+        f5_l2_1 = findViewById(R.id.f5_l2_1);
+        f5_l3_1 = findViewById(R.id.f5_l3_1);
 
-        f4_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        f5_editText1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     scrollView.post(() -> scrollView.scrollTo(0, 0));
-                    f4_editText1.selectAll();
+                    f5_editText1.selectAll();
                 }
             }
         });
 
-        f4_editText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        f5_editText2.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
                     scrollView.post(() -> scrollView.scrollTo(0, 0));
-                    f4_editText2.selectAll();
+                    f5_editText2.selectAll();
                 }
             }
         });
 
-        f4_editText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        f5_editText3.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    scrollView.post(() -> scrollView.scrollTo(0, f4_editText3.getBottom()));
-                    f4_editText3.selectAll();
+                    scrollView.post(() -> scrollView.scrollTo(0, f5_editText3.getBottom()));
+                    f5_editText3.selectAll();
                 }
             }
         });
 
-        f4_editText4.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    scrollView.post(() -> scrollView.scrollTo(0, f4_editText4.getBottom()));
-                    f4_editText4.selectAll();
-                }
-            }
-        });
-
-        f4_editText1.setOnTouchListener(new View.OnTouchListener() {
+        f5_editText1.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
-                    f4_editText1.requestFocus();
-                    f4_editText1.selectAll();
+                    f5_editText1.requestFocus();
+                    f5_editText1.selectAll();
                     v.performClick();
                     return true;
                 }
@@ -132,13 +118,13 @@ public class form4 extends AppCompatActivity {
             }
         });
 
-        f4_editText2.setOnTouchListener(new View.OnTouchListener() {
+        f5_editText2.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
-                    f4_editText2.requestFocus();
-                    f4_editText2.selectAll();
+                    f5_editText2.requestFocus();
+                    f5_editText2.selectAll();
                     v.performClick();
                     return true;
                 }
@@ -146,13 +132,13 @@ public class form4 extends AppCompatActivity {
             }
         });
 
-        f4_editText3.setOnTouchListener(new View.OnTouchListener() {
+        f5_editText3.setOnTouchListener(new View.OnTouchListener() {
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
-                    f4_editText3.requestFocus();
-                    f4_editText3.selectAll();
+                    f5_editText3.requestFocus();
+                    f5_editText3.selectAll();
                     v.performClick();
                     return true;
                 }
@@ -160,21 +146,7 @@ public class form4 extends AppCompatActivity {
             }
         });
 
-        f4_editText4.setOnTouchListener(new View.OnTouchListener() {
-            @SuppressLint("ClickableViewAccessibility")
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
-                    f4_editText4.requestFocus();
-                    f4_editText4.selectAll();
-                    v.performClick();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        f4_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        f5_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
 
             @Override
@@ -198,31 +170,6 @@ public class form4 extends AppCompatActivity {
                 return false;
             }
         });
-
-//        f4_editText4.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
-//
-//            @Override
-//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-//                if (keyEvent == null || (keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-//                    if (isRequestInProgress) {
-//                        return true; // Предотвращаем повторный запрос
-//                    }
-//
-//                    try {
-//                        jsonOutput.put("operation", "Update");
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//                    isRequestInProgress = true;
-//                    isRequestCancelled = false; // Сбрасываем флаг отмены
-//                    showProgressDialogWithCancelOption(); // Показываем прогресс-диалог
-//                    sendPostRequest(() -> isRequestInProgress = false); // Сбрасываем флаг после выполнения
-//                    return true;
-//                }
-//                return false;
-//            }
-//        });
     }
 
     public boolean Submit(View v) {
@@ -245,7 +192,7 @@ public class form4 extends AppCompatActivity {
 
     private void showProgressDialogWithCancelOption() {
         runOnUiThread(() -> {
-            progressDialog = new ProgressDialog(form4.this);
+            progressDialog = new ProgressDialog(form5.this);
             progressDialog.setMessage("Відправка данних...");
             progressDialog.setCancelable(false);
             progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "Відміна", (dialog, which) -> cancelRequest());
@@ -287,7 +234,6 @@ public class form4 extends AppCompatActivity {
             progressDialog = null;
         }
     }
-
     private void sendPostRequest(Runnable onComplete) {
         new Thread(() -> {
             try {
@@ -299,19 +245,18 @@ public class form4 extends AppCompatActivity {
                 connection.setDoOutput(true);
 
                 if (jsonOutput.optString("operation") == "Query") {
-                    jsonOutput.put("p1", f4_editText1.getText().toString().trim());
+                    jsonOutput.put("p1", f5_editText1.getText().toString().trim());
                     jsonOutput.put("p2", "");
                     jsonOutput.put("p3", "");
                     jsonOutput.put("p4", "");
                     jsonOutput.put("p5", "");
                     jsonOutput.put("p6", "");
                 } else {
-                    jsonOutput.put("p1", f4_editText1.getText().toString().trim());
-                    jsonOutput.put("p2", f4_l2_1.getText().toString().trim());
-                    jsonOutput.put("p3", f4_l3_1.getText().toString().trim());
-                    jsonOutput.put("p4", f4_editText2.getText().toString().trim());
-                    jsonOutput.put("p5", f4_editText3.getText().toString().trim());
-                    jsonOutput.put("p6", f4_editText4.getText().toString().trim());
+                    jsonOutput.put("p1", f5_editText1.getText().toString().trim());
+                    jsonOutput.put("p2", f5_l2_1.getText().toString().trim());
+                    jsonOutput.put("p3", f5_l3_1.getText().toString().trim());
+                    jsonOutput.put("p4", f5_editText2.getText().toString().trim());
+                    jsonOutput.put("p5", f5_editText3.getText().toString().trim());
                 }
 
                 try (OutputStream os = connection.getOutputStream()) {
@@ -330,7 +275,7 @@ public class form4 extends AppCompatActivity {
 
                     JSONObject jsonResponse = new JSONObject(response.toString());
                     String msg = jsonResponse.optString("msg", "");
-                    String result = jsonResponse.toString(4);
+                    String result = jsonResponse.toString(5);
                     int nextForm = jsonResponse.optInt("nextForm");
 
                     // обрабатываем ответ
@@ -338,42 +283,40 @@ public class form4 extends AppCompatActivity {
                         dismissLoader();
                         if (msg.isEmpty()) {
 
-                            if (nextForm != 4) {
+                            if (nextForm != 5) {
                                 try {
                                     jsonOutput.put("nextForm", nextForm);
                                 } catch (Exception e) {}
                                 changeForm();
 
                             } else {
-                                f4_editText1.setText(jsonResponse.optString("p1"));
-                                f4_editText2.setText(jsonResponse.optString("p4"));
-                                f4_editText3.setText(jsonResponse.optString("p5"));
-                                f4_editText4.setText(jsonResponse.optString("p6"));
-                                f4_l2_1.setText(jsonResponse.optString("p2"));
-                                f4_l3_1.setText(jsonResponse.optString("p3"));
+                                f5_editText1.setText(jsonResponse.optString("p1"));
+                                f5_editText2.setText(jsonResponse.optString("p4"));
+                                f5_editText3.setText(jsonResponse.optString("p5"));
+                                f5_l2_1.setText(jsonResponse.optString("p2"));
+                                f5_l3_1.setText(jsonResponse.optString("p3"));
                                 if (jsonOutput.optString("operation") == "Query") {
-                                    f4_editText2.requestFocus();
-                                    f4_editText2.selectAll();
+                                    f5_editText2.requestFocus();
+                                    f5_editText2.selectAll();
                                 } else {
-                                    f4_editText1.requestFocus();
-                                    f4_editText1.selectAll();
+                                    f5_editText1.requestFocus();
+                                    f5_editText1.selectAll();
                                 }
                             }
-                        } else if (nextForm != 4) {
+                        } else if (nextForm != 5) {
                             showInfo(msg);
                             changeForm();
                         } else {
                             showInfo(msg);
 
-                            f4_editText1.setText("");
-                            f4_editText2.setText("");
-                            f4_editText3.setText("");
-                            f4_editText4.setText("");
-                            f4_l2_1.setText("");
-                            f4_l3_1.setText("");
+                            f5_editText1.setText("");
+                            f5_editText2.setText("");
+                            f5_editText3.setText("");
+                            f5_l2_1.setText("");
+                            f5_l3_1.setText("");
 
-                            f4_editText1.requestFocus();
-                            f4_editText1.selectAll();
+                            f5_editText1.requestFocus();
+                            f5_editText1.selectAll();
                         }
                         onComplete.run();
                     });
@@ -408,11 +351,11 @@ public class form4 extends AppCompatActivity {
 
         if (nextForm == 4) {
             intent = new Intent(this, form4.class);
-        }
-        else if (nextForm == 6) {
+        } else if (nextForm == 5) {
+            intent = new Intent(this, form5.class);
+        } else if (nextForm == 6) {
             intent = new Intent(this, form6.class);
-        }
-        else if (nextForm == 7) {
+        } else if (nextForm == 7) {
             intent = new Intent(this, form7.class);
         } else if (nextForm == 8) {
             intent = new Intent(this, form8.class);
@@ -420,11 +363,9 @@ public class form4 extends AppCompatActivity {
             intent = new Intent(this, form9.class);
         } else if (nextForm == 10) {
             intent = new Intent(this, form10.class);
-        }
-        else if (nextForm == 11) {
+        } else if (nextForm == 11) {
             intent = new Intent(this, form11.class);
-        }
-        else if (nextForm == 12) {
+        } else if (nextForm == 12) {
             intent = new Intent(this, form12.class);
         } else if (nextForm == 13) {
             intent = new Intent(this, form13.class);
@@ -440,13 +381,12 @@ public class form4 extends AppCompatActivity {
     @SuppressLint("MissingSuperCall")
     @Override
     public void onBackPressed() {
-        f4_editText1.setText("");
-        f4_editText2.setText("");
-        f4_editText3.setText("");
-        f4_editText4.setText("");
-        f4_l2_1.setText("");
-        f4_l3_1.setText("");
-        f4_editText1.requestFocus();
-        f4_editText1.selectAll();
+        f5_editText1.setText("");
+        f5_editText2.setText("");
+        f5_editText3.setText("");
+        f5_l2_1.setText("");
+        f5_l3_1.setText("");
+        f5_editText1.requestFocus();
+        f5_editText1.selectAll();
     }
 }

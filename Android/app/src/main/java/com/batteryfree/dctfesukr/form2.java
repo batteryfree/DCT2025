@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class form2 extends AppCompatActivity {
     public JSONObject jsonOutput;
@@ -120,6 +121,7 @@ public class form2 extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
                     f2_editText1.requestFocus();
                     f2_editText1.selectAll();
+                    v.performClick();
                     return true;
                 }
                 return false;
@@ -132,6 +134,7 @@ public class form2 extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_UP && !v.hasFocus()) {
                     f2_editText2.requestFocus();
                     f2_editText2.selectAll();
+                    v.performClick();
                     return true;
                 }
                 return false;
@@ -139,31 +142,50 @@ public class form2 extends AppCompatActivity {
         });
 
 
-        f2_editText2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
-
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                if (keyEvent == null || (keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                    if (isRequestInProgress) {
-                        return true; // Предотвращаем повторный запрос
-                    }
-
-                    try {
-                        jsonOutput.put("operation", "Update");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    isRequestInProgress = true;
-                    isRequestCancelled = false; // Сбрасываем флаг отмены
-                    showProgressDialogWithCancelOption(); // Показываем прогресс-диалог
-                    sendPostRequest(() -> isRequestInProgress = false); // Сбрасываем флаг после выполнения
-                    return true;
-                }
-                return false;
-            }
-        });
+//        f2_editText2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
+//
+//            @Override
+//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+//                if (keyEvent == null || (keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+//                    if (isRequestInProgress) {
+//                        return true; // Предотвращаем повторный запрос
+//                    }
+//
+//                    try {
+//                        jsonOutput.put("operation", "Update");
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    isRequestInProgress = true;
+//                    isRequestCancelled = false; // Сбрасываем флаг отмены
+//                    showProgressDialogWithCancelOption(); // Показываем прогресс-диалог
+//                    sendPostRequest(() -> isRequestInProgress = false); // Сбрасываем флаг после выполнения
+//                    return true;
+//                }
+//                return false;
+//            }
+//        });
     }
+
+    public boolean Submit(View v) {
+        AtomicBoolean isRequestInProgress = new AtomicBoolean(false); // Флаг для предотвращения повторного запроса
+        if (isRequestInProgress.get()) {
+            return true; // Предотвращаем повторный запрос
+        }
+
+        try {
+            jsonOutput.put("operation", "Update");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        isRequestInProgress.set(true);
+        isRequestCancelled = false; // Сбрасываем флаг отмены
+        showProgressDialogWithCancelOption(); // Показываем прогресс-диалог
+        sendPostRequest(() -> isRequestInProgress.set(false)); // Сбрасываем флаг после выполнения
+        return true;
+    }
+
 
     private void showProgressDialogWithCancelOption() {
         runOnUiThread(() -> {
@@ -185,7 +207,7 @@ public class form2 extends AppCompatActivity {
     private void cancelRequest() {
         isRequestCancelled = true;
         dismissLoader();
-        showInfo("Запит був відмінен користувачем.");
+        showInfo("Запит було скасовано користувачем.");
     }
 
     public void startMenu1(View v) {
