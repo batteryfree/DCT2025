@@ -1,0 +1,180 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #9CC7CA;
+  color: #345757;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.wrap-comp {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.btn {
+  margin: 10px 10px 0;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: #FFFFFF;
+  border-radius: 10px;
+  text-transform: uppercase;
+  border: solid 1px #345757;
+  height: 40px;
+  color: #345757;
+}
+
+.menu__btn:active {
+  background-color: #345757;
+  color: #FFFFFF;
+  border: solid 1px #FFFFFF;
+}
+
+.wrap-nav {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.wrap-nav-invisbtn {
+  display: flex;
+  margin: 10px;
+}
+
+.icon {
+  padding: 5px;
+  border: solid 1px #345757;
+  display: block;
+  width: 30px;
+  height: 30px;
+  fill: #345757;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+}
+
+.icon:active {
+  fill: #FFFFFF;
+  background-color: #345757;
+  border-color: #FFFFFF;
+}
+
+.form-tittle-invisbtn {
+  text-transform: uppercase;
+  margin: auto;
+  padding-right: 40px;
+}
+
+.form-tittle {
+  text-transform: uppercase;
+}
+
+
+.label {
+  margin-left: 15px;
+  font-size: 20px;
+}
+
+.input {
+  margin: 0 10px;
+  font-size: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.wrap-btn-keyboard {
+  margin: 0 10px;
+  display: flex;
+}
+
+.btn-keyboard {
+  margin: 5px 2px;
+  flex-basis: 100%;
+
+  border: solid 1px #345757;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  font-size: 20px;
+  color: #345757;
+}
+
+.btn-keyboard--posl {
+  margin-left: 0;
+}
+
+.btn-keyboard--posr {
+  margin-right: 0;
+}
+
+
+.btn-keyboard:active {
+  border: solid 1px #FFFFFF;
+  background-color: #345757;
+  color: #FFFFFF;
+}
+
+.wrap-key {
+  display: flex;
+}
+
+.wrap-key-6 {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.wrap-group-btn {
+  flex-basis: 85%;
+}
+
+.btn-keyboard--c {
+  flex-basis: 15%;
+  height: 90px;
+  margin-right: 10px;
+  margin-left: 0;
+}
+
+.txt {
+  margin: 0 10px 0;
+  word-break: break-all;
+  font-size: 20px;
+  font-weight: 700;
+  border-bottom: solid #345757;
+}
+
+.span {
+  margin: 5px 10px;
+}
+
+@media (max-width: 370.98px) {
+  .btn {
+    font-size: 16px;
+  }
+
+  .label {
+    font-size: 16px;
+  }
+
+  .input {
+    font-size: 16px;
+  }
+
+  .btn-keyboard {
+    font-size: 16px;
+  }
+
+  .txt {
+    font-size: 16px;
+  }
+}
