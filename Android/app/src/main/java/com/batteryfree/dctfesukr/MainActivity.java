@@ -61,6 +61,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void startForm5(View v) {
+        Intent intent = new Intent(this, form5.class);
+        intent.putExtra("URL", URL_1C);
+        intent.putExtra("jsonOutput", jsonOutput.toString());
+        startActivity(intent);
+    }
+
     public void startSettings(View v) {
         Intent intent = new Intent(this, settings.class);
         startActivity(intent);
