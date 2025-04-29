@@ -29,7 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".form9"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".form8"
             android:exported="false" />

@@ -72,9 +72,6 @@ public class form2 extends AppCompatActivity {
 
         f2_editText1.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             private boolean isRequestInProgress = false; // Флаг для предотвращения повторного запроса
-
-
-
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (keyEvent == null || (keyEvent.getAction() == KeyEvent.ACTION_DOWN && keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
@@ -185,7 +182,6 @@ public class form2 extends AppCompatActivity {
         sendPostRequest(() -> isRequestInProgress.set(false)); // Сбрасываем флаг после выполнения
         return true;
     }
-
 
     private void showProgressDialogWithCancelOption() {
         runOnUiThread(() -> {
